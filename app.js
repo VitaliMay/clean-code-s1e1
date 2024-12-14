@@ -1,40 +1,42 @@
 
-const taskInput = document.getElementById("new-task");//Add a new task.
-const addButton = document.getElementsByTagName("button")[0];//first button
-const incompleteTaskHolder = document.getElementById("todo-tasks");//ul of #incompleteTasks
-const completedTasksHolder = document.getElementById("completed-tasks");//completed-tasks
+const taskInput = document.querySelector(".task_new-task");
+const addButton = document.querySelector(".button-edit_add");
+const incompleteTaskHolder = document.querySelector(".list_todo");
+const completedTasksHolder = document.querySelector(".list_completed");
 
 //New task list item
 const createNewTaskElement = function(taskString) {
 
   const listItem = document.createElement("li");
+  listItem.className = "list-item";
 
   const checkBox = document.createElement("input");
   checkBox.type = "checkbox";
+  checkBox.className = "list-item__status"
   checkBox.setAttribute("aria-label", "Task status");
 
   const label = document.createElement("label");
+  label.textContent = taskString;
+  label.className = 'task list-item__title';
+
   const editInput = document.createElement("input");
+  editInput.type = "text";
+  editInput.className = "task list-item__text";
+  editInput.setAttribute("aria-label", "Edit task");
+
   const editButton = document.createElement("button");
+  editButton.textContent = "Edit";
+  editButton.className = "button-edit";
 
   const deleteButton = document.createElement("button");
   deleteButton.className = "button-delete";
   deleteButton.setAttribute("aria-label", "Delete");
 
   const deleteButtonImg = document.createElement("img");
+  deleteButtonImg.className = "button-delete__img"
   deleteButtonImg.setAttribute("alt", "Button-delete");
-
-  label.textContent = taskString;
-  label.className = 'task';
-
-  editInput.type = "text";
-  editInput.className = "task";
-  editInput.setAttribute("aria-label", "Edit task");
-
-  editButton.textContent = "Edit";
-  editButton.className = "button-edit";
-
   deleteButtonImg.src = './remove.svg';
+
   deleteButton.append(deleteButtonImg);
 
   listItem.append(checkBox);
@@ -61,13 +63,12 @@ const addTask = function() {
 //Edit an existing task.
 
 const editTask = function() {
-
   const listItem = this.parentNode;
 
-  const editInput = listItem.querySelector('input[type=text]');
-  const label = listItem.querySelector("label");
+  const editInput = listItem.querySelector(".list-item__text");
+  const label = listItem.querySelector(".list-item__title");
   const editBtn = listItem.querySelector(".button-edit");
-  const containsClass = listItem.classList.contains("edit-mode");
+  const containsClass = listItem.classList.contains("list-item_edit-mode");
 
   if (containsClass) {
     label.textContent = editInput.value;
@@ -78,30 +79,25 @@ const editTask = function() {
     editBtn.textContent = "Save";
   }
 
-  listItem.classList.toggle("edit-mode");
+  listItem.classList.toggle("list-item_edit-mode");
 };
 
 
 //Delete task.
 const deleteTask = function() {
-
   const listItem = this.parentNode;
   const ul = listItem.parentNode;
   ul.removeChild(listItem);
 }
 
-
 //Mark task completed
 const taskCompleted = function() {
-
   const listItem = this.parentNode;
   completedTasksHolder.append(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 }
 
-
 const taskIncomplete = function() {
-
   const listItem = this.parentNode;
   incompleteTaskHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
@@ -113,9 +109,9 @@ addButton.addEventListener("click", addTask);
 
 const bindTaskEvents = function(taskListItem, checkBoxEventHandler) {
 
-  const checkBox = taskListItem.querySelector("input[type=checkbox]");
-  const editButton = taskListItem.querySelector("button.button-edit");
-  const deleteButton = taskListItem.querySelector("button.button-delete");
+  const checkBox = taskListItem.querySelector(".list-item__status");
+  const editButton = taskListItem.querySelector(".button-edit");
+  const deleteButton = taskListItem.querySelector(".button-delete");
 
   // onclick automatically replaces the previous handler,
   // and there is no need to check for duplicates (when using addEventListener)
@@ -132,3 +128,4 @@ for (let i = 0; i < incompleteTaskHolder.children.length; i += 1){
 for (let i = 0; i < completedTasksHolder.children.length; i += 1){
   bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
 }
+
