@@ -1,19 +1,74 @@
-<html>
-<HEAD><title>Todo App</title>
-<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="style.css" type="text/css" MEDIA="screen" charset="utf-8">
-</HEAD>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <meta name="description" content="Task management using the Eisenhower matrix. TODO task list.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" media="screen">
+  <link rel="icon" href="./favicon-TODO.png" type="image/png">
+</head>
 <body>
-<div class="aaa"><img src="./eisenhower-matrix.jpg"><a class='more_inf' href="https://goal-life.com/page/method/matrix-eisenhower">Want more details&quest;</a></div>
-<div class="centered-main-page-element"><p id='topSectionForAddingElementToList'><label for="new-task">Add Item</label><div class="task-row-wrapper"><input id='new-task'class="task" type="text"><button>Add</button></div>
-</p><h3>Todo</h3>
-<ul id='incompleteTasks'>
-<li><input type='checkbox'><label class="task">Pay Bills</label><input type="text" class="task"><button class="edit">Edit</button><button class="delete"><img src="./remove.svg"></button></li>
-<li class="editMode"><input type="checkbox"><label class="task">Go Shopping</label><input type="text" value="Go Shopping" class="task"><button class='edit'>Save</button><button class="delete"><img src="./remove.svg"></button></li>
-</ul><h3>Completed</h3><ul id="completed-tasks"><li><input type="checkbox" checked><label class="task">See the Doctor</label><input type="text" class="task"><button class="edit">Edit</button><button class="delete"><img src="./remove.svg"></button>
-</li>
-</ul>
-</div>
-<script type="text/javascript" SRC="app.js"></script>
+  <div class="wrapper">
+    <header class="header container container_header">
+      <h1 class="visually-hidden">TODO task management. Eisenhower matrix.</h1>
+      <img class="header__img" src="./eisenhower-matrix.jpg" alt="Eisenhower-matrix">
+      <a class="header__link" href="https://goal-life.com/page/method/matrix-eisenhower">Want more details?</a>
+    </header>
+    <main class="main container">
+      <section class="add-task">
+        <h2 class="title">Add Item</h2>
+        <div class="new-task">
+          <input class="task task_new-task" type="text" aria-label="Add task">
+          <button class="button-edit button-edit_add">Add</button>
+        </div>
+      </section>
+
+      <section class="todo">
+        <h2 class="title">Todo</h2>
+        <ul class="list list_todo">
+          <li class="list-item">
+            <input class="list-item__status" type="checkbox" aria-label="Task status">
+            <label class="task list-item__title">Pay Bills</label>
+            <input class="task list-item__text" type="text">
+            <button class="button-edit list-item__edit">Edit</button>
+            <button class="button-delete list-item__delete" aria-label="Delete">
+              <img class="button-delete__img" src="./remove.svg" alt="Button-delete">
+            </button>
+          </li>
+          <li class="list-item list-item_edit-mode">
+            <input class="list-item__status" type="checkbox" aria-label="Task status">
+            <label class="task list-item__title">Go Shopping</label>
+            <input class="task list-item__text" type="text" value="Go Shopping" aria-label="Edit task">
+            <button class="button-edit list-item__edit">Save</button>
+            <button class="button-delete list-item__delete" aria-label="Delete">
+              <img class="button-delete__img" src="./remove.svg" alt="Button-delete">
+            </button>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="title">Completed</h2>
+        <ul class="list list_completed">
+          <li class="list-item">
+            <input class="list-item__status" type="checkbox" checked aria-label="Task status">
+            <label class="task list-item__title">See the Doctor</label>
+            <input class="task list-item__text" type="text" aria-label="Edit task">
+            <button class="button-edit list-item__edit">Edit</button>
+            <button class="button-delete list-item__delete" aria-label="Delete">
+              <img class="button-delete__img" src="./remove.svg" alt="Button-delete">
+            </button>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
 </body>
 </html>
